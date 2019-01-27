@@ -11,7 +11,7 @@ namespace ReverseInteger
         static void Main(string[] args)
         {
             Solution su = new Solution();
-            Console.WriteLine(su.Reverse(1534236469).ToString());
+            Console.WriteLine(su.IsPalindrome(123321).ToString());
 
             Console.ReadKey();
         }
@@ -27,47 +27,37 @@ namespace ReverseInteger
 
         int result;
 
-        public int Reverse(int x)
+        public bool IsPalindrome(int x)
         {
-            if (x <= int.MinValue || (x >= int.MaxValue))
-                return 0;
-            else
+            if ((x < int.MaxValue) && (x >= 0))
             {
-                try
+                int m = x;
+                if (x < 0) m = Math.Abs(m);
+
+                for (int i = 10; i >= 0; i--)
                 {
-                    int m = x;
-                    if (x < 0) m = Math.Abs(m);
+                    y = Convert.ToInt32(Math.Floor(m / Math.Pow(10, i)));
+                    z = Convert.ToInt32(Math.Floor(m % Math.Pow(10, i)));
+                    m = z;
 
-                    for (int i = 10; i >= 0; i--)
-                    {
-                        y = Convert.ToInt32(Math.Floor(m / Math.Pow(10, i)));
-                        z = Convert.ToInt32(Math.Floor(m % Math.Pow(10, i)));
-                        m = z;
-
-                        result_split[i] = y;
-                    }
-
-                    for (int j = 0; j <= 10; j++)
-                    {
-                        if (result_split[j] > 0) k = j;
-                    }
-                    string resultt;
-                    resultt = "";
-                    for (int u = 0; u <= k; u++)
-                    {
-
-                        resultt += result_split[u].ToString();
-                    }
-
-                    result = Convert.ToInt32(resultt);
-                    if (x < 0) result = -result;
+                    result_split[i] = y;
                 }
-                catch
+
+                for (int j = 0; j <= 10; j++)
                 {
-                    result = 0;
+                    if (result_split[j] > 0) k = j;
                 }
-                return result;
+
+                for (int u = 0; u <= k; u++)
+                {
+
+                    result += result_split[u] * Convert.ToInt32(Math.Pow(10, k - u));
+                }
+
+                if (x == result) return true;
             }
+
+            return false;
         }
     }
 }
