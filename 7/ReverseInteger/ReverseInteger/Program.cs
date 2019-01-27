@@ -33,35 +33,39 @@ namespace ReverseInteger
                 return 0;
             else
             {
-
-                int m = x;
-                if (x < 0) m = Math.Abs(m);
-
-                for (int i = 9; i >= 0; i--)
+                try
                 {
-                    y = Convert.ToInt32(Math.Floor(m / Math.Pow(10, i)));
-                    z = Convert.ToInt32(Math.Floor(m % Math.Pow(10, i)));
-                    m = z;
+                    int m = x;
+                    if (x < 0) m = Math.Abs(m);
 
-                    Console.WriteLine("y=" + y.ToString());
+                    for (int i = 10; i >= 0; i--)
+                    {
+                        y = Convert.ToInt32(Math.Floor(m / Math.Pow(10, i)));
+                        z = Convert.ToInt32(Math.Floor(m % Math.Pow(10, i)));
+                        m = z;
 
-                    result_split[i] = y;
+                        result_split[i] = y;
+                    }
+
+                    for (int j = 0; j <= 10; j++)
+                    {
+                        if (result_split[j] > 0) k = j;
+                    }
+                    string resultt;
+                    resultt = "";
+                    for (int u = 0; u <= k; u++)
+                    {
+
+                        resultt += result_split[u].ToString();
+                    }
+
+                    result = Convert.ToInt32(resultt);
+                    if (x < 0) result = -result;
                 }
-
-                for (int j = 0; j < 10; j++)
+                catch
                 {
-                    if (result_split[j] > 0) k = j;
+                    result = 0;
                 }
-
-                Console.WriteLine("k=" + k.ToString());
-
-                for (int u = 0; u <= k; u++)
-                {
-                    result += result_split[u] * Convert.ToInt32(Math.Pow(10, k - u));
-                }
-
-                if (x < 0) result = -result;
-
                 return result;
             }
         }
