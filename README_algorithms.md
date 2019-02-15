@@ -84,3 +84,34 @@
 由于题目要求括号必须按照先进后出的顺序排列，非常适合栈的数据结构，所以引入栈验证括号顺序。
 根据测试用例"){"、"(("对括号顺序及括号总数是否为零进行判断。
 # 26. Remove Duplicates from Sorted Array #
+拿到题目看了半天，没有搞懂题目要求返回的长度是什么意思，参照了力扣中文网站，才弄明白是将不重复的数字排序后计算长度。
+### 自己 ###
+```
+for (int i = 0; i < nums.Length; i++)
+{
+    for (int j = i + 1; j < nums.Length; j++)
+    {
+        if (nums[i] != nums[j])
+        {
+            for (int k = i + 1; k < j; k++)
+            {
+                nums[k] = nums[j];
+            }
+            len++;
+            break;
+        }
+    }
+}
+```
+### 网上 ###
+```
+for (int i = 1; i < nums.Length; i++)
+{
+    if (nums[i] != nums[j])
+    {
+        j++;
+        nums[j] = nums[i];
+    }
+}
+```
+网上算法耗时300+ms，自己的算法耗时700+ms，使用3次循环增加了复杂度，应尽量寻找最优算法。
