@@ -115,3 +115,4 @@ for (int i = 1; i < nums.Length; i++)
 }
 ```
 网上算法耗时300+ms，自己的算法耗时700+ms，使用3次循环增加了复杂度，应尽量寻找最优算法。
+# 27. Remove Element #
