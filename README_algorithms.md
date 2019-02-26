@@ -75,15 +75,15 @@
         {"CM", 900}
     }
 由于罗马减法只能由I、X、C前置构成，具有特殊性，网上解题方法充分抓住这一点，穷举出所有可能的罗马字符组合，并且保存字符组合使用的数据类型：字典也非常合适。
-# 14. Longest Common Prefix #
+## 14. Longest Common Prefix ##
 开始尝试按照试题1思路，取第1个字符串，利用foreach(char ch in strs[0])循环处理字符，但是foreach循环不好对字符进行对比，所以放弃使用。
 其后发现所有公共字符串前缀都应该在字符串数组相同位置，可以通过比较字符串数组相同位置上字符是否相同判断，可以使用string.IndexOf函数实现此功能。
 最后引入strsMinlen变量找出字符串数组最小长度，防止由于字符串长度变小，引起索引超范围异常。
-# 20. Valid Parentheses #
+## 20. Valid Parentheses ##
 由题可知，括号数量应为偶数。并且将六种括号分为三组，分别引入三个变量记录总数：num_small、num_midlle、num_big，由题可知，变量必须>0。
 由于题目要求括号必须按照先进后出的顺序排列，非常适合栈的数据结构，所以引入栈验证括号顺序。
 根据测试用例"){"、"(("对括号顺序及括号总数是否为零进行判断。
-# 26. Remove Duplicates from Sorted Array #
+## 26. Remove Duplicates from Sorted Array ##
 拿到题目看了半天，没有搞懂题目要求返回的长度是什么意思，参照了力扣中文网站，才弄明白是将不重复的数字排序后计算长度。
 ### 自己 ###
 ```
@@ -115,4 +115,64 @@ for (int i = 1; i < nums.Length; i++)
 }
 ```
 网上算法耗时300+ms，自己的算法耗时700+ms，使用3次循环增加了复杂度，应尽量寻找最优算法。
-# 27. Remove Element #
+## 27. Remove Element ##
+由于题目限制必须在数组基础上进行修改，而不能新增数组处理。考虑将所有数组中等于参数值的项目都移动至数组尾部，根据数组移动的操作计算新数组长度。
+## 28. Implement StrStr ##
+使用string.Substring函数按顺序在主字符串中查找子字符串。根据测试用例做适量调整。
+## 35. Search Insert Position ##
+由于题目给出为已排序数组，只需按顺序比较即可。
+做完题目运行效果不错，截图保存。
+![提交结果](https://github.com/cavytina/LeeCode/raw/master/35/SearchInsertPosition/sub.jpg)
+## 38. Count and Say ##
+题目需要使用迭代函数进行处理，但是迭代函数不熟悉，只大概写出了单次计算的大概算法。
+### 自己 ###
+```
+public void SayWord(string strs)
+{
+    int num = 1;
+    string str = string.Empty;
+
+    for (int i = 0; i < strs.Length; i++)
+    {
+        if (i + 1 < strs.Length)
+        {
+            if (strs[i] == strs[i + 1])
+            {
+                num++;
+            }
+            else
+            {
+                str += num.ToString() + strs[i].ToString();
+                num = 1;
+            }
+        }
+    }
+
+    Console.WriteLine(str.ToString());
+}
+```
+### 网上 ###
+```
+public string CountAndSay(int n)
+ {
+     if (n == 1) return "1";
+     //递归调用，然后对字符串处理
+     string str = CountAndSay(n - 1) + "*";//为了str末尾的标记，方便循环读数
+     int count = 1; //用于计算每个字符出现的次数；
+     string s = "";
+     for (int i = 0; i < str.Length - 1; i++) //因为增加了一个“*”,所以只能遍历到"*"之前的字符；
+     {
+         if (str[i] == str[i + 1])
+         {
+             count++;//计数增加
+         }
+         else
+         {
+             s = s + count.ToString() + str[i];//个数在前，字符在后；
+             count = 1;//初始化，为后面的字符做准备；
+         }
+     }
+     return s;
+ }
+ ```
+ 这是第一次抄网上代码了，以后需要加强迭代函数的运用。
