@@ -176,3 +176,20 @@ public string CountAndSay(int n)
  }
  ```
  这是第一次抄网上代码了，以后需要加强迭代函数的运用。
+ ## 53. Maximum Subarray ##
+ 看题目需要找出连续最大子数组，感觉这是一个组合题目。
+ 1.考虑通过冒泡排序处理数组，通过记录排序前元素的位置，找到最大子数组，但是无法进行后续处理。
+ 2.考虑遍历数组计算元素和，但是同样无法进行后续处理。
+ ### 网上 ###
+ ```
+ public int MaxSubArray(int[] nums)
+ {
+     for (int i = 1; i < nums.Length; i++)
+     {
+         nums[i] = Math.Max(nums[i], nums[i] + nums[i - 1]);
+         nums[0] = Math.Max(nums[0], nums[i]);
+     }
+     return nums[0];
+ }
+```
+网上的处理综合了考虑的两个方面，通过遍历数组并比较相邻元素和的办法处理。
